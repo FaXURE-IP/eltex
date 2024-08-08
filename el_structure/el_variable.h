@@ -11,6 +11,6 @@ typedef struct
 } abonent;
 
 extern int abonent_count;
-extern abonent abonents[MAX_ABONENTS];
+extern abonent *abonents;
 
 #endif // EL_VARIABLE_H

@@ -3,19 +3,20 @@
 
 void add_abonent()
 {
-    if (abonent_count >= MAX_ABONENTS)
+    abonent_count++;
+    abonents = realloc(abonents, abonent_count * sizeof(abonent));
+    if (abonents == NULL)
     {
-        printf("Справочник переполнен. Нельзя добавить больше абонентов.\n");
-        return;
+        printf("Ошибка выделения памяти.\n");
+        exit(1);
     }
 
     printf("Введите имя: ");
-    scanf("%s", abonents[abonent_count].name);
+    scanf("%s", abonents[abonent_count - 1].name);
     printf("Введите фамилию: ");
-    scanf("%s", abonents[abonent_count].second_name);
+    scanf("%s", abonents[abonent_count - 1].second_name);
     printf("Введите номер телефона: ");
-    scanf("%s", abonents[abonent_count].tel);
+    scanf("%s", abonents[abonent_count - 1].tel);
 
-    abonent_count++;
     printf("Абонент успешно добавлен.\n");
 }

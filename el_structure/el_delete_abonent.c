@@ -13,10 +13,19 @@ void delete_abonent()
     {
         if (strcmp(abonents[i].name, name_to_delete) == 0)
         {
-            // Удаляем абонента (заполняем нулями)
-            strcpy(abonents[i].name, "");
-            strcpy(abonents[i].second_name, "");
-            strcpy(abonents[i].tel, "");
+            for (int j = i; j < abonent_count - 1; j++)
+            {
+                abonents[j] = abonents[j + 1];
+            }
+
+            abonent_count--;
+            abonents = realloc(abonents, abonent_count * sizeof(abonent));
+            if (abonents == NULL && abonent_count > 0)
+            {
+                printf("Ошибка выделения памяти.\n");
+                exit(1);
+            }
+
             found = 1;
             printf("Абонент %s удален из справочника.\n", name_to_delete);
             break;
