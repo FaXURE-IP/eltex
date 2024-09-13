@@ -15,6 +15,7 @@ all:
 	$(MAKE) -C ./el_structure
 	$(MAKE) -C ./el_calculate
 	$(MAKE) -C ./el_process
+	$(MAKE) -C ./el_threads
 
 clean: 
 	find . -name '*.o' -exec $(RM) '{}' \;
