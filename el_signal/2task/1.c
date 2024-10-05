@@ -7,7 +7,7 @@
 
 int main(void)
 {
-
+    printf("PID процесса: %d\n", getpid());
     sigset_t set;
 
     int status, sig_num;

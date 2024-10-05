@@ -1,30 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-#include <errno.h>
 #include <unistd.h>
-#include <asm-generic/signal.h>
+#include <bits/sigaction.h>
 
-void sig_handler(int sig_num);
+void sigusr1_handler(int sig_num) {
+    printf("Received signal SIGUSR1 (%d)\n", sig_num);
+}
 
 int main(void)
-{
-    struct sigaction sa;
-    int status;
+{   
+    printf("PID процесса: %d\n", getpid());
 
-    sa.sa_handler = sig_handler;
-    status = sigaction(SIGUSR1, &sa, NULL);
+    struct sigaction sig_action;
+    sig_action.sa_handler = &sigusr1_handler;
+    sigemptyset(&sig_action.sa_mask);
+    sig_action.sa_flags = 0;
 
-    if (status < 0) {
+    if (sigaction(SIGUSR1, &sig_action, NULL) == -1)
+    {
         perror("sigaction");
         exit(EXIT_FAILURE);
     }
 
-    while (1) {
+    while (1)
+    {
         sleep(1);
     }
-}
 
-void sig_handler(int sig_num) {
-  printf("Signal SIGUSR1 - %d\n", sig_num);
+    return 0;
 }
