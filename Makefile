@@ -16,6 +16,11 @@ all:
 	$(MAKE) -C ./el_calculate
 	$(MAKE) -C ./el_process
 	$(MAKE) -C ./el_threads
+	$(MAKE) -C ./el_socket
+	$(MAKE) -C ./el_queue
+	$(MAKE) -C ./el_sem
+	$(MAKE) -C ./el_signal
+	$(MAKE) -C ./el_pipes
 
 clean: 
 	find . -name '*.o' -exec $(RM) '{}' \;
